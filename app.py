@@ -131,7 +131,7 @@ if "indice" not in st.session_state:
 if "indice2" not in st.session_state:
     st.session_state.current = None
 
-st.title("Quiz Terminologie")
+st.title("Quiz Irregular Verbs")
 
 if st.session_state.step == "question":
     st.session_state.reponse = ""
@@ -154,9 +154,9 @@ if st.session_state.step == "reponse":
     st.session_state.indice2 = indice2
     question = st.session_state.dico[st.session_state.indice][st.session_state.indice2]
     st.session_state.questions[st.session_state.indice] = question
-    st.write("Question : "+question)
+    st.write("Verbe : "+question)
     with st.form("form_reponse"):
-        reponse = st.text_input("Écris ta réponse (ou 'stop' pour arrêter)", key="reponse_input")
+        reponse = st.text_input("Écris toutes les formes de ce verbe (ou 'stop' pour arrêter)", key="reponse_input")
         validee = st.form_submit_button("Valider")
 
     if validee:
