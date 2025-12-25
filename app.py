@@ -173,7 +173,7 @@ if st.session_state.step == "reponse":
             st.session_state.step = "fin"
         else:
             st.session_state.step = "feedback"
-            st.session_state.reponse = entree1 + " " + entree2 + " " + entree3 + " " + entree4
+            st.session_state.reponse = entree1 + " " + entree2 + " " + entree3 + " " + entree4 + " "
         st.rerun()
 
 if st.session_state.step == "feedback":
