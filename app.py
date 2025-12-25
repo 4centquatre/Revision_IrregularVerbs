@@ -37,7 +37,7 @@ dico = {
     29: ["Forgive", "Forgave", "Forgiven", "Pardonner"],
     30: ["Drive", "Drove", "Driven", "Conduire"],
     31: ["Ride", "Rode", "Ridden", "Monter à cheval / vélo"],
-    32: ["Rise", "Rose", "Risen", "S’élever, se lever"],
+    32: ["Rise", "Rose", "Risen", "S'élever, se lever"],
     33: ["Write", "Wrote", "Written", "Écrire"],
     34: ["Choose", "Chose", "Chosen", "Choisir"],
     35: ["Forget", "Forgot", "Forgotten", "Oublier"],
@@ -156,15 +156,24 @@ if st.session_state.step == "reponse":
     st.session_state.questions[st.session_state.indice] = question
     st.write("Verbe : "+question)
     with st.form("form_reponse"):
-        reponse = st.text_input("Écris toutes les formes de ce verbe (ou 'stop' pour arrêter)", key="reponse_input")
+        #reponse = st.text_input("Écris toutes les formes de ce verbe (ou 'stop' pour arrêter)", key="reponse_input")
+        col1, col2, col3, col4 = st.columns(4)
+        with col1:
+            entree1 = st.text_input("Infinitif")
+        with col2:
+            entree2 = st.text_input("Prétérit")
+        with col3:
+            entree3 = st.text_input("Participe Passé")
+        with col4:
+            entree4 = st.text_input("Traduction")
         validee = st.form_submit_button("Valider")
 
     if validee:
-        if reponse.lower() == "stop":
+        if entree1.lower() == "stop":
             st.session_state.step = "fin"
         else:
             st.session_state.step = "feedback"
-            st.session_state.reponse = reponse
+            st.session_state.reponse = entree1 + " " + entree2 + " " + entree3 + " " + entree4
         st.rerun()
 
 if st.session_state.step == "feedback":
@@ -172,6 +181,7 @@ if st.session_state.step == "feedback":
     for car in st.session_state.dico[st.session_state.indice]:
         chaine += car + " "
     st.write("La réponse était : "+chaine)
+    st.write("Ta réponse était : "+st.session_state.reponse)
     vrai_faux = st.radio("Tu as eu :", ["Vrai", "Faux"], horizontal=True)
 
     if st.button("Continuer"):
@@ -204,6 +214,7 @@ if st.session_state.step == "fin":
         st.session_state.dico = dico.copy()
         st.session_state.indice = None
         st.session_state.indice2 = None
+        st.session_state.reponse = ""
         st.rerun()
     elif st.button("Refaire avec tes erreurs"):
         if len(st.session_state.end) > 0:
@@ -215,6 +226,7 @@ if st.session_state.step == "fin":
             st.session_state.end = {}
             st.session_state.indice = None
             st.session_state.indice2 = None
+            st.session_state.reponse = ""
             st.rerun()
         else:
             st.warning("Tu n'as aucune erreur à refaire.")
