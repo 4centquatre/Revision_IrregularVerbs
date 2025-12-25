@@ -168,12 +168,12 @@ if st.session_state.step == "reponse":
             entree4 = st.text_input("Traduction")
         validee = st.form_submit_button("Valider")
 
-    if validee:
-        if entree1.lower() == "stop":
-            st.session_state.step = "fin"
-        else:
-            st.session_state.step = "feedback"
-            st.session_state.reponse = entree1 + " " + entree2 + " " + entree3 + " " + entree4 + " "
+    if st.button("Stop"):
+        st.session_state.step = "fin"
+
+    elif validee:
+        st.session_state.step = "feedback"
+        st.session_state.reponse = entree1 + " " + entree2 + " " + entree3 + " " + entree4 + " "
         st.rerun()
 
 if st.session_state.step == "feedback":
