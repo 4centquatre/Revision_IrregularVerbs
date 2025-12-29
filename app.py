@@ -230,5 +230,3 @@ if st.session_state.step == "fin":
             st.rerun()
         else:
             st.warning("Tu n'as aucune erreur à refaire.")
-
-
