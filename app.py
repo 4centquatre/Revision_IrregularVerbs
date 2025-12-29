@@ -109,7 +109,7 @@ dico = {
     99: ["Bind", "Bound", "Bound", "Lier, nouer, attacher"],
     100: ["Find", "Found", "Found", "Trouver"],
     101: ["Light", "Lit", "Lit", "Allumer"],
-    102: ["Sit", "Sat", "Sat", "S’asseoir"],
+    102: ["Sit", "Sat", "Sat", "S'asseoir"],
     103: ["Stick", "Stuck", "Stuck", "Coller"],
     104: ["Strike", "Struck", "Struck", "Frapper, choquer"]
 }
