@@ -2,122 +2,71 @@ import streamlit as st
 from random import randint
 
 dico = {
-    0: ["Bet", "Bet", "Bet", "Parier"],
-    1: ["Cast", "Cast", "Cast", "Jeter"],
-    2: ["Cost", "Cost", "Cost", "Coûter"],
-    3: ["Cut", "Cut", "Cut", "Couper"],
-    4: ["Hit", "Hit", "Hit", "Frapper"],
-    5: ["Hurt", "Hurt", "Hurt", "Blesser"],
-    6: ["Let", "Let", "Let", "Laisser, permettre"],
-    7: ["Put", "Put", "Put", "Mettre"],
-    8: ["Read", "Read", "Read", "Lire"],
-    9: ["Set", "Set", "Set", "Poser, placer, installer"],
-    10: ["Shut", "Shut", "Shut", "Fermer"],
-    11: ["Upset", "Upset", "Upset", "Bouleverser, renverser"],
+    0: ["Radiographie",{0: ["Technique basée sur l'absorption différentielle des rayons X, selon la densité des tissus"],
+                        1: ["- Les rayons X sont envoyés sur la zone à étudier où ils vont être plus ou moins absorbés selon les tissus. Ils vont ensuite impressionner un film photosensible, ou être analysés par un logiciel informatique.",
+                            "- Les zones claires d'une radiographie sont appelées opacités et correspondent aux tissus denses qui ont fortement absorbé les rayons X, par exemple, les os.",
+                            "- Les zones sombres d'une radiographie sont appelées clartés et correspondent aux tissus mous qui ont peu absorbé les rayons X.",
+                            "- L'étude des organes absorbant peu les rayons X nécessite l'utilisation de produit de contraste absorbant les rayons X."],
+                        2: ["Pour diagnostiquer des atteintes : fractures, malformation, présence de tumeur..."], 
+                        3: ["Examen rapide. Non invasif. Peu onéreux. Indolore"], 
+                        4: ["Clichés imprécis. Technique irradiante pour le personnel médical et le patient. Eventuelle allergie à l'iode. Rayons X cancérigènes et tératogènes."]}],
+    1: ["Scanographie",{0: ["Technique basée sur l'absorption différentielle des rayons X, selon la densité des tissus."], 
+                        1: ["- Les rayons X sont envoyés sur la zone à étudier où ils vont être plus ou moins absorbés selon les tissus. Ils vont ensuite impressionner un film photosensible, ou être analysés par un logiciel informatique.",
+                            "- Dans le cas de la tomodensitométrie, l'émetteur de rayons X tourne autour du patient, ce qui permet d'obtenir des images selon plusieurs plans de coupes. Un traitement informatique permet de reconstruire les organes en trois dimensions. Les images sont ainsi plus précises."], 
+                        2: ["Il permet de voir une anomalie peu ou pas visible sur une radiographie ou une échographie. Il est très utile pour visualiser les organes du système nerveux central mais pas seulement. Il permet aussi de localiser une tumeur, confirmer un accident vasculaire cérébral, diagnostiquer une maladie osseuse etc."], 
+                        3: ["Images en coupes et en 3D. Image plus précises. Examen indolore et non invasif"], 
+                        4: ["Technique irradiante donc contre indiquée pour femme enceinte. Allergie possible à l'iode. Appareillage plus coûteux que celui de la radiographie. Rayons X cancérigènes et tératogènes."]}],
+    2: ["IRM",{0: ["Technique basée sur l'utilisation d'un champ magnétique et des ondes radios."], 
+               1: ["- En fonction de la teneur en hydrogène des tissus, un système informatique donne des images en coupes, en trois dimensions.",
+                   "- La qualité des images peut être améliorée en injectant un produit de contraste, le gadolinium"], 
+               2: ["- Analyse Morphologique : ",
+                   "Images très précises et en coupes, particulièrement bien adaptée à l'étude du SNC. Diagnostic de tumeurs, kystes... Mise en évidence de malformations.",
+                   "- Analyse Fonctionelle : ",
+                   "Basée sur l'étude de la circulation sanguine. Mise en évidence de zones mal oxygénées. Diagnostic de maladies neuro-dégénératives."], 
+               3: ["Sans Danger. Indolore. Rares allergies au produit de contraste"], 
+               4: ["Technique interdite aux patients portant de pacemakers, prothèse, éléments métalliques. Examen long et bruyant pouvant provoquer l'anxiété des personnes claustrophobes."]}],
+    3: ["Echographie",{0: ["Technique d'imagerie médicale basée sur l'utilisation d'ultrasons."], 
+                       1: ["- Les ultrasons sont émis par une sonde à une certaine fréquence vers les régions à examiner. Ces ondes reviennent vers la sonde selon le principe de l'écho. Selon la densité des tissus traversés, leur éloignement par rapport à la sonde, la fréquence des ultrasons est plus ou moins modifiée. Un système informatique permet d'obtenir des images en direct."], 
+                       2: ["- Analyse morphologique : ",
+                           "Mise en évidence de malformations. Recherche de tumeurs, kystes, nodules... Echographie obstétricale : Suivi de la grossesse et du développement du foetus",
+                           "- Echographie Doppler : ",
+                           "Les globules réfléchissent les ultrasons en modifiant leur fréquence. Plus les cellules vont vite, plus la fréquence est modifiée. Cette technique permet de mesurer la vitesse d'écoulement du sang, et de dépister des sténoses ou des thromboses."], 
+                       3: ["Observation en temps réel et en mouvement."], 
+                       4: ["Aucun danger ni contre-indication."]}],
+    4: ["Scintigraphie",{0: ["Technique d'imagerie médicale basée sur l'utilisation d'un isotope radioactif"], 
+                         1: ["- L'isotope est injecté par voie intraveineuse et se fixe sur les tissus ou organes à explorer. Il émet alors des rayonnements gamma détectés par une gammacaméra.",
+                             "- Le niveau de fixation de l'isotope dans les cellules dépend de leur activité. Plus la cellule est active, plus la fixation est forte. A l'inverse, si les cellules sont nécrosées, la fixation est faible voire nulle.",
+                             "- Un traitement informatique permet d'obtenir des images en couleur : rouge, si les cellules fixent fortement l'isotope, jaune/vert, quand la fixation est moyenne, bleu quand les cellules fixent peu ou pas l'isotope."], 
+                         2: ["Scintigraphie cardiaque : évaluer les conséquences d'un infarctus : mise en évidence de cellules nécrosées. Evaluer le volume d'éjection systolique cardiaque.",
+                             "Cancérologie : Dépister tumeur ou métastases = zone de forte fixation isotope."], 
+                         3: ["Examen peu invasif. Indolore. Examen Global."], 
+                         4: ["Utilisation de la radioactivité = cancérigène. Réalisé dans des centres de médecine nucléaire. Protection du personnel. Traitement approprié des déchets. Nombre de scintigraphies à limiter."]}],
+    5: ["Fibroscopie",{0: ["Technique basée sur l'introduction d'un fibroscope dans une cavité ouverte ou fermée du corps, d'un tube muni de fibres optiques et d'une source de lumière froide pour observer la paroi de cette cavité."], 
+                       1: ["- Par voie haute : Introduction du fibroscope par voir buccale. Exploration de l'oesophage, estomac et duodénum.",
+                           "- Par voie basse : Introduction du fibroscope par une voie anale. Exploration du rectum, colon et la fin de l'iléon."], 
+                       2: ["- Observation des cavités.",
+                           "- Obtention d'images de qualité, en trois dimensions et en couleur.",
+                           "- Vision directe.",
+                           "- Mise en évidence de malformation, polype, tumeur...",
+                           "- Prélèvement d'un fragment de tissu appelé biopsie pour une analyse anatomopathologique.",
+                           "- Ablation d'une tumeur ou de l'appendice par exemple."], 
+                       3: ["Vision directe. Examen rapide, facile à réaliser et pouvant être répéter. Possibilité de réaliser biopsie."], 
+                       4: ["Préparation longue avant l'examen. Gestes très techniques. Gênant voire douloureux. Anesthésie locale ou générale. Risques de perforation. Risques d'infection nosocomiale."]}]
+}
 
-    12: ["Beat", "Beat", "Beaten", "Battre"],
-    13: ["Become", "Became", "Become", "Devenir"],
-    14: ["Come", "Came", "Come", "Venir"],
-    15: ["Overcome", "Overcame", "Overcome", "Vaincre, surmonter"],
-    16: ["Run", "Ran", "Run", "Courir"],
-
-    17: ["Be", "Was / Were", "Been", "Être"],
-    18: ["Do", "Did", "Done", "Faire"],
-    19: ["Go", "Went", "Gone", "Aller"],
-    20: ["Begin", "Began", "Begun", "Commencer"],
-    21: ["Drink", "Drank", "Drunk", "Boire"],
-    22: ["Ring", "Rang", "Rung", "Sonner"],
-    23: ["Sing", "Sang", "Sung", "Chanter"],
-    24: ["Swim", "Swam", "Swum", "Nager"],
-    25: ["Bite", "Bit", "Bitten", "Mordre"],
-    26: ["Hide", "Hid", "Hidden", "(Se) cacher"],
-
-    27: ["Give", "Gave", "Given", "Donner"],
-    28: ["Forbid", "Forbade", "Forbidden", "Interdire"],
-    29: ["Forgive", "Forgave", "Forgiven", "Pardonner"],
-    30: ["Drive", "Drove", "Driven", "Conduire"],
-    31: ["Ride", "Rode", "Ridden", "Monter à cheval / vélo"],
-    32: ["Rise", "Rose", "Risen", "S'élever, se lever"],
-    33: ["Write", "Wrote", "Written", "Écrire"],
-    34: ["Choose", "Chose", "Chosen", "Choisir"],
-    35: ["Forget", "Forgot", "Forgotten", "Oublier"],
-    36: ["Freeze", "Froze", "Frozen", "Geler"],
-    37: ["Break", "Broke", "Broken", "Casser"],
-    38: ["Speak", "Spoke", "Spoken", "Parler"],
-    39: ["Steal", "Stole", "Stolen", "Voler, dérober"],
-    40: ["Awake", "Awoke", "Awoken", "Se réveiller"],
-    41: ["Shake", "Shook", "Shaken", "Secouer"],
-    42: ["Take", "Took", "Taken", "Prendre"],
-    43: ["Draw", "Drew", "Drawn", "Dessiner"],
-    44: ["Fall", "Fell", "Fallen", "Tomber"],
-    45: ["Fly", "Flew", "Flown", "Voler"],
-    46: ["Blow", "Blew", "Blown", "Souffler"],
-    47: ["Grow", "Grew", "Grown", "Grandir, faire pousser"],
-    48: ["Know", "Knew", "Known", "Savoir"],
-    49: ["Throw", "Threw", "Thrown", "Jeter"],
-    50: ["Bear", "Bore", "Borne", "Supporter"],
-    51: ["Tear", "Tore", "Torn", "Déchirer"],
-    52: ["Swear", "Swore", "Sworn", "Jurer"],
-    53: ["Wear", "Wore", "Worn", "Porter (un vêtement)"],
-    54: ["Lie", "Lay", "Lain", "Être étendu(e)"],
-    55: ["Eat", "Ate", "Eaten", "Manger"],
-    56: ["See", "Saw", "Seen", "Voir"],
-
-    57: ["Have", "Had", "Had", "Avoir"],
-    58: ["Hear", "Heard", "Heard", "Entendre"],
-    59: ["Make", "Made", "Made", "Faire, fabriquer"],
-    60: ["Dream", "Dreamt", "Dreamt", "Rêver"],
-    61: ["Learn", "Learnt", "Learnt", "Apprendre"],
-    62: ["Mean", "Meant", "Meant", "Signifier"],
-    63: ["Lead", "Led", "Led", "Mener, guider"],
-    64: ["Leave", "Left", "Left", "Partir, quitter"],
-    65: ["Bend", "Bent", "Bent", "(Se) courber"],
-    66: ["Lend", "Lent", "Lent", "Prêter"],
-    67: ["Send", "Sent", "Sent", "Envoyer"],
-    68: ["Smell", "Smelt", "Smelt", "Sentir"],
-    69: ["Spend", "Spent", "Spent", "Dépenser, passer"],
-    70: ["Bleed", "Bled", "Bled", "Saigner"],
-    71: ["Feed", "Fed", "Fed", "Nourrir"],
-    72: ["Feel", "Felt", "Felt", "Sentir, ressentir"],
-    73: ["Keep", "Kept", "Kept", "Garder"],
-    74: ["Meet", "Met", "Met", "Rencontrer"],
-    75: ["Sleep", "Slept", "Slept", "Dormir"],
-    76: ["Sweep", "Swept", "Swept", "Balayer"],
-    77: ["Weep", "Wept", "Wept", "Pleurer"],
-    78: ["Build", "Built", "Built", "Construire"],
-    79: ["Burn", "Burnt", "Burnt", "Brûler"],
-    80: ["Bring", "Brought", "Brought", "Apporter"],
-    81: ["Buy", "Bought", "Bought", "Acheter"],
-    82: ["Fight", "Fought", "Fought", "Se battre"],
-    83: ["Seek", "Sought", "Sought", "Chercher"],
-    84: ["Think", "Thought", "Thought", "Penser"],
-
-    85: ["Catch", "Caught", "Caught", "Attraper"],
-    86: ["Teach", "Taught", "Taught", "Enseigner"],
-    87: ["Lay", "Laid", "Laid", "Mettre, poser"],
-    88: ["Pay", "Paid", "Paid", "Payer"],
-    89: ["Say", "Said", "Said", "Dire"],
-    90: ["Sell", "Sold", "Sold", "Vendre"],
-    91: ["Tell", "Told", "Told", "Dire, raconter"],
-    92: ["Stand", "Stood", "Stood", "Supporter"],
-    93: ["Understand", "Understood", "Understood", "Comprendre"],
-    94: ["Get", "Got", "Got", "Obtenir"],
-    95: ["Shoot", "Shot", "Shot", "Tirer (sur)"],
-    96: ["Lose", "Lost", "Lost", "Perdre"],
-    97: ["Shine", "Shone", "Shone", "Briller"],
-    98: ["Win", "Won", "Won", "Gagner"],
-    99: ["Bind", "Bound", "Bound", "Lier, nouer, attacher"],
-    100: ["Find", "Found", "Found", "Trouver"],
-    101: ["Light", "Lit", "Lit", "Allumer"],
-    102: ["Sit", "Sat", "Sat", "S’asseoir"],
-    103: ["Stick", "Stuck", "Stuck", "Coller"],
-    104: ["Strike", "Struck", "Struck", "Frapper, choquer"]
+dico_indice2 = {0: "Définition",
+                1: "Principes",
+                2: "Intérêts médicaux",
+                3: "Avantages",
+                4: "Inconvénients"
 }
 
 if "score" not in st.session_state:
     st.session_state.score = 0
 if "questions" not in st.session_state:
     st.session_state.questions = {}
+if "dico_reponses" not in st.session_state:
+    st.session_state.dico_reponses = {}
 if "current" not in st.session_state:
     st.session_state.current = None
 if "step" not in st.session_state:
@@ -131,7 +80,7 @@ if "indice" not in st.session_state:
 if "indice2" not in st.session_state:
     st.session_state.current = None
 
-st.title("Quiz Irregular Verbs")
+st.title("Quiz Imagerie Médicale")
 
 if st.session_state.step == "question":
     st.session_state.reponse = ""
@@ -150,22 +99,14 @@ if st.session_state.step == "question":
     st.rerun()
 
 if st.session_state.step == "reponse":
-    indice2 = randint(0,len(st.session_state.dico[st.session_state.indice])-1)
+    indice2 = randint(0,4)
     st.session_state.indice2 = indice2
-    question = st.session_state.dico[st.session_state.indice][st.session_state.indice2]
-    st.session_state.questions[st.session_state.indice] = question
-    st.write("Verbe : "+question)
+    imagerie = st.session_state.dico[st.session_state.indice][0]
+    st.session_state.questions[st.session_state.indice] = imagerie
+    st.write("Imagerie : "+imagerie)
     with st.form("form_reponse"):
-        #reponse = st.text_input("Écris toutes les formes de ce verbe (ou 'stop' pour arrêter)", key="reponse_input")
-        col1, col2, col3, col4 = st.columns(4)
-        with col1:
-            entree1 = st.text_input("Infinitif")
-        with col2:
-            entree2 = st.text_input("Prétérit")
-        with col3:
-            entree3 = st.text_input("Participe Passé")
-        with col4:
-            entree4 = st.text_input("Traduction")
+        st.write(dico_indice2[st.session_state.indice2]+" : ")
+        reponse = st.text_input("Écris ta réponse", key="reponse_input")
         validee = st.form_submit_button("Valider")
 
     if st.button("Stop"):
@@ -173,14 +114,13 @@ if st.session_state.step == "reponse":
 
     elif validee:
         st.session_state.step = "feedback"
-        st.session_state.reponse = entree1 + " " + entree2 + " " + entree3 + " " + entree4 + " "
+        st.session_state.reponse = reponse
         st.rerun()
 
 if st.session_state.step == "feedback":
-    chaine = ""
-    for car in st.session_state.dico[st.session_state.indice]:
-        chaine += car + " "
-    st.write("La réponse était : "+chaine)
+    st.write("La réponse était : ")
+    for chaine in st.session_state.dico[st.session_state.indice][1][st.session_state.indice2]:
+        st.write(chaine)
     st.write("Ta réponse était : "+st.session_state.reponse)
     vrai_faux = st.radio("Tu as eu :", ["Vrai", "Faux"], horizontal=True)
 
@@ -188,12 +128,12 @@ if st.session_state.step == "feedback":
         if vrai_faux == "Vrai":
             st.session_state.score += 1
         elif vrai_faux == "Faux":
-            st.session_state.end[st.session_state.indice] = st.session_state.dico[st.session_state.indice]
+            st.session_state.end[st.session_state.indice] = st.session_state.dico[st.session_state.indice][1][st.session_state.indice2]
         st.session_state.step = "question"
         st.rerun()
 
 if st.session_state.step == "fin":
-    st.write("C'est fini ! Ton score est de : "+str(st.session_state.score)+"/"+str(len(st.session_state.questions.keys())-1)+ " Bravo mon coeur t'es trop forte !")
+    st.write("C'est fini ! Ton score est de : "+str(st.session_state.score)+"/"+str(len(st.session_state.dico_reponses.keys()))+ " Bravo mon coeur t'es trop forte !")
     if len(st.session_state.end.keys())>1:
         st.write("Tes reponses fausses etaient : ")
     elif len(st.session_state.end.keys()) == 1:
@@ -216,19 +156,5 @@ if st.session_state.step == "fin":
         st.session_state.indice2 = None
         st.session_state.reponse = ""
         st.rerun()
-    elif st.button("Refaire avec tes erreurs"):
-        if len(st.session_state.end) > 0:
-            st.session_state.questions = {}
-            st.session_state.score = 0
-            st.session_state.current = None
-            st.session_state.step = "question"
-            st.session_state.dico = st.session_state.end.copy()
-            st.session_state.end = {}
-            st.session_state.indice = None
-            st.session_state.indice2 = None
-            st.session_state.reponse = ""
-            st.rerun()
-        else:
-            st.warning("Tu n'as aucune erreur à refaire.")
 
 
