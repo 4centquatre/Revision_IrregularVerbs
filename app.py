@@ -150,8 +150,8 @@ if st.session_state.step == "question":
     st.rerun()
 
 if st.session_state.step == "reponse":
-    indice2 = randint(0,len(st.session_state.dico[st.session_state.indice])-1)
-    st.session_state.indice2 = indice2
+    #indice2 = randint(0,len(st.session_state.dico[st.session_state.indice])-1)
+    st.session_state.indice2 = 3
     question = st.session_state.dico[st.session_state.indice][st.session_state.indice2]
     st.session_state.questions[st.session_state.indice] = question
     st.write("Verbe : "+question)
