@@ -155,15 +155,13 @@ if st.session_state.step == "reponse":
     st.session_state.questions[st.session_state.indice] = question
     st.write("Verbe : "+question)
     with st.form("form_reponse"):
-        col1, col2, col3, col4 = st.columns(4)
+        col1, col2, col3 = st.columns(3)
         with col1:
             entree1 = st.text_input("Infinitif")
         with col2:
             entree2 = st.text_input("Prétérit")
         with col3:
             entree3 = st.text_input("Participe Passé")
-        with col4:
-            entree4 = st.text_input("Traduction")
         validee = st.form_submit_button("Valider")
 
     if st.button("Stop"):
@@ -172,7 +170,7 @@ if st.session_state.step == "reponse":
 
     elif validee:
         st.session_state.step = "feedback"
-        st.session_state.reponse = entree1 + " " + entree2 + " " + entree3 + " " + entree4 + " "
+        st.session_state.reponse = entree1 + " " + entree2 + " " + entree3 + " " 
         st.rerun()
 
 if st.session_state.step == "feedback":
