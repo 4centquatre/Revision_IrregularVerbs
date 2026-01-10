@@ -142,7 +142,7 @@ if st.session_state.step == "question":
     for cle in st.session_state.dico.keys():
         tab_indices.append(cle)
     i = randint(0, len(tab_indices) - 1)
-    while tab_indices[i] in st.session_state.end.keys():
+    while tab_indices[i] in st.session_state.questions.keys():
         i = randint(0, len(tab_indices) - 1)
     indice = tab_indices[i]
     st.session_state.indice = indice
@@ -150,13 +150,11 @@ if st.session_state.step == "question":
     st.rerun()
 
 if st.session_state.step == "reponse":
-    #indice2 = randint(0,len(st.session_state.dico[st.session_state.indice])-1)
     st.session_state.indice2 = 3
     question = st.session_state.dico[st.session_state.indice][st.session_state.indice2]
     st.session_state.questions[st.session_state.indice] = question
     st.write("Verbe : "+question)
     with st.form("form_reponse"):
-        #reponse = st.text_input("Écris toutes les formes de ce verbe (ou 'stop' pour arrêter)", key="reponse_input")
         col1, col2, col3, col4 = st.columns(4)
         with col1:
             entree1 = st.text_input("Infinitif")
@@ -170,6 +168,7 @@ if st.session_state.step == "reponse":
 
     if st.button("Stop"):
         st.session_state.step = "fin"
+        st.rerun()
 
     elif validee:
         st.session_state.step = "feedback"
